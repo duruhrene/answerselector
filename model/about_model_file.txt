@@ -1,0 +1,15 @@
+[복구 안내] model 폴더의 파일들을 분실했을 경우
+
+1. model.onnx, tokenizer.json
+   - Hugging Face 등에서 'Sentence Similarity'용 모델을 ONNX 포맷으로 변환하거나 다운로드하여 배치하세요.
+
+2. model_info (확장자 없음)
+   - 아래 내용으로 'model_info' 파일을 생성하세요. (JSON 포맷)
+   {
+       "model_name": "모델명",
+       "license": "라이선스",
+       "hidden_size": 768,
+       "max_length": 512,
+       "output_name": "last_hidden_state",
+       "use_pooling": true
+   }

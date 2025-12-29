@@ -1,0 +1,14 @@
+# 파이썬 캐시 파일 무시(전역)
+__pycache__/
+*.py[cod]
+
+# database 폴더 내 db파일들 무시
+database/*.db
+database/*.json
+
+# model 폴더 내 모델 관련 파일들 무시
+model/*.json
+model/*.onnx
+model/*.txt
+model/model_info
+!model/about_model_file.txt
