@@ -85,9 +85,19 @@ class AppContext:
         앱의 버전 및 저작권 정보를 반환합니다.
         항상 하드코딩된 기본값을 사용합니다.
         """
+        copyright_text = "Copyright (c) 2025-2026 Duruhrene. All rights reserved."
+        license_path = self.base_dir / "LICENSE"
+        if license_path.exists():
+            try:
+                # 첫 줄만 읽어서 저작권 문구로 사용
+                with open(license_path, 'r', encoding='utf-8') as f:
+                    copyright_text = f.readline().strip()
+            except Exception as e:
+                self.logger.warning(f"Failed to read LICENSE file: {e}")
+
         return {
             "version": "v1.0.0 (2025-12-30)",
-            "copyright": "Copyright (c) 2025-2026 Duruhrene. All rights reserved."
+            "copyright": copyright_text
         }
 
     def close(self):

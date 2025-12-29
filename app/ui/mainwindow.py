@@ -125,7 +125,7 @@ class MainWindow(wx.Frame):
         version = info.get("version", "Unknown Version")
         copyright_text = info.get("copyright", "Unknown Copyright")
         
-        wx.MessageBox(f"AnswerSelector(민원답변검색기)\n{version}\n{copyright_text}", 
+        wx.MessageBox(f"AnswerSelector(민원답변검색기) {version}\n{copyright_text}", 
                       "애플리케이션 정보", wx.OK | wx.ICON_INFORMATION)
 
     def OnPackageLicense(self, event):
