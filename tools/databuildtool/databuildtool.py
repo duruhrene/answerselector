@@ -117,7 +117,7 @@ class EmbedManager:
 class DataBuilderApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("AnswerSelector 데이터 빌더")
+        self.root.title("Data Build Tool for AnswerSelector v1")
         self.root.geometry("600x500")
         
         self.InitUI()

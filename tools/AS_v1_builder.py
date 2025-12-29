@@ -2,7 +2,13 @@ import PyInstaller.__main__
 import shutil
 from pathlib import Path
 
+import os
+
 def build():
+    # 0. Set working directory to project root (Two levels up from this script in tools/)
+    project_root = Path(__file__).resolve().parent.parent
+    os.chdir(project_root)
+
     # 1. Clean previous build
     if Path("dist").exists():
         shutil.rmtree("dist")
