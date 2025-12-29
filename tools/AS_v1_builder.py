@@ -49,16 +49,10 @@ def build():
         print(f"Copied {src_file.name} to {model_out_dir}")
         
     # Copy License file
-    license_file = Path("THIRDPARTY_LICENSE.txt")
+    license_file = Path("LICENSE")
     if license_file.exists():
         shutil.copy2(license_file, output_dir)
         print(f"Copied {license_file.name} to {output_dir}")
-
-    # Copy Copyright file
-    copyright_file = Path("LICENSE")
-    if copyright_file.exists():
-        shutil.copy2(copyright_file, output_dir)
-        print(f"Copied {copyright_file.name} to {output_dir}")
     
     print("\n[Build Complete]")
     print(f"Output Directory: {output_dir}")

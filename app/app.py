@@ -85,20 +85,36 @@ class AppContext:
         앱의 버전 및 저작권 정보를 반환합니다.
         항상 하드코딩된 기본값을 사용합니다.
         """
-        copyright_text = "Copyright (c) 2025-2026 Duruhrene. All rights reserved."
+        header_text = "AnswerSelector Unknown Version\nCopyright Unknown"
         license_path = self.base_dir / "LICENSE"
+        
         if license_path.exists():
             try:
-                # 첫 줄만 읽어서 저작권 문구로 사용
+                # 첫 두 줄만 읽어서 헤더 정보로 사용
                 with open(license_path, 'r', encoding='utf-8') as f:
-                    copyright_text = f.readline().strip()
+                    lines = [f.readline().strip() for _ in range(2)]
+                    # 빈 줄이 있을 수 있으므로 필터링
+                    valid_lines = [line for line in lines if line]
+                    if valid_lines:
+                        header_text = "\n".join(valid_lines)
             except Exception as e:
-                self.logger.warning(f"Failed to read LICENSE file: {e}")
+                self.logger.warning(f"Failed to read LICENSE header: {e}")
 
         return {
-            "version": "v1.0.0 (2025-12-30)",
-            "copyright": copyright_text
+            "header": header_text
         }
+
+    def get_full_license_text(self) -> str:
+        """LICENSE 파일 전체 내용을 읽어서 반환합니다."""
+        license_path = self.base_dir / "LICENSE"
+        if not license_path.exists():
+            return "LICENSE 파일을 찾을 수 없습니다."
+            
+        try:
+            with open(license_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception as e:
+            return f"라이선스 파일을 읽는 중 오류가 발생했습니다.\n{e}"
 
     def close(self):
         """앱 종료 시 자원을 정리합니다."""

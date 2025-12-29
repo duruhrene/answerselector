@@ -121,23 +121,11 @@ class MainWindow(wx.Frame):
         self.Destroy()
 
     def OnAbout(self, event):
-        info = self.context.app_info
-        version = info.get("version", "Unknown Version")
-        copyright_text = info.get("copyright", "Unknown Copyright")
-        
-        wx.MessageBox(f"AnswerSelector(민원답변검색기) {version}\n{copyright_text}", 
-                      "애플리케이션 정보", wx.OK | wx.ICON_INFORMATION)
+        header = self.context.app_info.get("header", "정보를 불러올 수 없습니다.")
+        wx.MessageBox(header, "애플리케이션 정보", wx.OK | wx.ICON_INFORMATION)
 
     def OnPackageLicense(self, event):
-        license_path = self.context.base_dir / "THIRDPARTY_LICENSE.txt"
-        if license_path.exists():
-            try:
-                with open(license_path, 'r', encoding='utf-8') as f:
-                    info_text = f.read()
-            except Exception as e:
-                info_text = f"라이선스 파일을 읽는 중 오류가 발생했습니다.\n{e}"
-        else:
-            info_text = "THIRDPARTY_LICENSE.txt 파일을 찾을 수 없습니다."
+        info_text = self.context.get_full_license_text()
 
         # 별도의 다이얼로그 생성
         dlg = wx.Dialog(self, title="외부 패키지(소프트웨어) 라이선스", size=(750, 750))
