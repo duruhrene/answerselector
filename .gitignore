@@ -17,4 +17,3 @@ model/model_info
 build/
 dist/
 *.spec
-build_app.py
