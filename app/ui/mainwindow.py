@@ -84,8 +84,8 @@ class MainWindow(wx.Frame):
         # 라이선스 서브메뉴
         license_submenu = wx.Menu()
         
-        # 1. 패키지(소프트웨어) 라이선스
-        pkg_license_item = license_submenu.Append(wx.ID_ANY, "패키지(소프트웨어) 라이선스", "패키지(소프트웨어) 라이선스 정보")
+        # 1. 외부 패키지(소프트웨어) 라이선스
+        pkg_license_item = license_submenu.Append(wx.ID_ANY, "외부 패키지(소프트웨어) 라이선스", "외부 패키지(소프트웨어) 라이선스 정보")
         self.Bind(wx.EVT_MENU, self.OnPackageLicense, pkg_license_item)
         
         # 2. 언어모델 라이선스 (생성만)
@@ -129,26 +129,18 @@ class MainWindow(wx.Frame):
                       "애플리케이션 정보", wx.OK | wx.ICON_INFORMATION)
 
     def OnPackageLicense(self, event):
-        info_text = (
-            "1. Python\n"
-            "- License: PSF License\n"
-            "- Copyright (c) Python Software Foundation.\n\n"
-            "2. wxPython\n"
-            "- License: wxWindows Library Licence\n"
-            "- Copyright (c) Julian Smart, Robert Roebling et al.\n\n"
-            "3. NumPy\n"
-            "- License: BSD License\n"
-            "- Copyright (c) NumPy Developers.\n\n"
-            "4. ONNX Runtime\n"
-            "- License: MIT License\n"
-            "- Copyright (c) Microsoft Corporation.\n\n"
-            "5. Hugging Face Tokenizers\n"
-            "- License: Apache 2.0 License\n"
-            "- Copyright (c) Hugging Face Inc.\n"
-        )
+        license_path = self.context.base_dir / "THIRDPARTY_LICENSE.txt"
+        if license_path.exists():
+            try:
+                with open(license_path, 'r', encoding='utf-8') as f:
+                    info_text = f.read()
+            except Exception as e:
+                info_text = f"라이선스 파일을 읽는 중 오류가 발생했습니다.\n{e}"
+        else:
+            info_text = "THIRDPARTY_LICENSE.txt 파일을 찾을 수 없습니다."
 
         # 별도의 다이얼로그 생성
-        dlg = wx.Dialog(self, title="패키지(소프트웨어) 라이선스", size=(500, 500))
+        dlg = wx.Dialog(self, title="외부 패키지(소프트웨어) 라이선스", size=(750, 750))
         
         vbox = wx.BoxSizer(wx.VERTICAL)
         

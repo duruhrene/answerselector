@@ -1,5 +1,4 @@
 AnswerSelector uses the following third-party software. 
-The licenses for the software are listed below.
 
 ================================================================================
 1. Python (PSF License)
@@ -7,7 +6,6 @@ The licenses for the software are listed below.
 ================================================================================
 
 PSF LICENSE AGREEMENT FOR PYTHON 3.x
-------------------------------------
 
 1. This LICENSE AGREEMENT is between the Python Software Foundation ("PSF"), and
    the Individual or Organization ("Licensee") accessing and otherwise using Python
@@ -46,8 +44,6 @@ PSF LICENSE AGREEMENT FOR PYTHON 3.x
 ================================================================================
 
 wxWindows Library Licence, Version 3.1
-======================================
-
 Copyright (c) 1998-2005 Julian Smart, Robert Roebling et al
 
 Everyone is permitted to copy and distribute verbatim copies
@@ -102,18 +98,17 @@ code.
 ================================================================================
 
 Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are
-met:
+modification, are permitted provided that the following conditions are met:
 
     * Redistributions of source code must retain the above copyright
-       notice, this list of conditions and the following disclaimer.
+      notice, this list of conditions and the following disclaimer.
     * Redistributions in binary form must reproduce the above
-       copyright notice, this list of conditions and the following
-       disclaimer in the documentation and/or other materials provided
-       with the distribution.
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
     * Neither the name of the NumPy Developers nor the names of any
-       contributors may be used to endorse or promote products derived
-       from this software without specific prior written permission.
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT

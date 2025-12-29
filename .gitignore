@@ -12,3 +12,9 @@ model/*.onnx
 model/*.txt
 model/model_info
 !model/about_model_file.txt
+
+# 빌드 스크립트 및 아티팩트 무시
+build/
+dist/
+*.spec
+build_app.py
