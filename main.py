@@ -27,7 +27,7 @@ from app.ui.mainwindow import MainWindow
 
 def main():
     """
-    AnswerSelector_v2 진입점 (wxPython 버전).
+    AnswerSelector 진입점 (wxPython 버전).
     """
     try:
         # 1. wx.App 인스턴스 생성 (GUI 팝업을 위해 가장 먼저 생성)

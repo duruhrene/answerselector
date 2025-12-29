@@ -3,7 +3,7 @@ import logging
 
 class MainWindow(wx.Frame):
     """
-    AnswerSelector_v2의 메인 윈도우 (wxPython).
+    AnswerSelector의 메인 윈도우 (wxPython).
     좌측 탭(Notebook)과 우측 빌더(Panel)를 SplitterWindow로 분할하여 구성합니다.
     """
     def __init__(self, parent, title, context):

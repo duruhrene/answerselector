@@ -32,7 +32,7 @@ class AppContext:
         
         # 로그 설정
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        self.logger = logging.getLogger("AnswerSelectorV2")
+        self.logger = logging.getLogger("AnswerSelector")
 
         # 2. 매니저 초기화
         self.logger.info("Initializing managers...")
@@ -82,50 +82,13 @@ class AppContext:
 
     def _load_app_info(self) -> dict:
         """
-        copyright_default.json 파일을 로드하여 앱 정보를 반환합니다.
-        파일이 없거나 유효하지 않으면 기본값을 사용합니다.
-        
-        경로 규칙:
-        - 개발 환경: app/copyright_default.json (app.py와 같은 폴더)
-        - 배포 환경: _internal/copyright_default.json (exe 실행 위치의 _internal 폴더)
+        앱의 버전 및 저작권 정보를 반환합니다.
+        항상 하드코딩된 기본값을 사용합니다.
         """
-        default_info = {
+        return {
             "version": "v1.0.0 (2025-12-30)",
             "copyright": "Copyright (c) 2025-2026 Duruhrene. All rights reserved."
         }
-        
-        # 1. 개발/빌드 환경에 따라 파일 경로 결정
-        if getattr(sys, 'frozen', False):
-             # 빌드된(Frozen) 상태: _internal 폴더 내부 확인
-             # base_dir은 sys.executable의 부모(dist/AnswerSelector)이므로 _internal을 명시해야 함
-             json_path = self.base_dir / "_internal" / "copyright_internal"
-        else:
-             # 개발 환경: app 폴더 내부 확인
-             json_path = self.base_dir / "app" / "copyright_internal"
-            
-        if json_path and json_path.exists():
-            try:
-                import json
-                with open(json_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    
-                    # 필수 키가 다 있는지 확인
-                    if "version" in data and "copyright" in data:
-                        self.logger.info(f"Loaded app info from {json_path}")
-                        return data
-            except Exception:
-                pass
-        
-        # 통합된 에러/기본값 처리
-        self.logger.info("Invalid copyright_internal file. Using defaults.")
-        
-        # [복구 안내] copyright_internal 파일을 분실했을 경우
-        # 아래 내용으로 빌드된 exe 폴더 내 _internal 폴더에 'copyright_internal' (확장자 없음) 파일을 생성하세요.
-        # {
-        #     "version": "v1.0.0 (2025-12-30)",
-        #     "copyright": "Copyright (c) 2025-2026 (개발자 정보). All rights reserved."
-        # }
-        return default_info
 
     def close(self):
         """앱 종료 시 자원을 정리합니다."""
