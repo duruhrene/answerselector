@@ -22,8 +22,8 @@ database/*
 !database/.gitkeep
 
 # 5. 언어모델(about_model_file.txt만 허용)
-database/*
-!database/.gitkeep
+model/*
+!model/about_model_file.txt
 
 # 6. 빌드 스크립트 및 아티팩트
 build/
