@@ -1,15 +1,44 @@
-[복구 안내] model 폴더의 파일들을 분실했을 경우
+Model 폴더 관리 가이드
 
-1. model.onnx, tokenizer.json
-   - Hugging Face 등에서 'Sentence Similarity'용 모델을 ONNX 포맷으로 변환하거나 다운로드하여 배치하세요.
+1. 언어모델 파일 구성
+	본 앱은 ONNX 포맷의 임베딩 모델을 활용합니다. Hugging Face 등에서 'Sentence Similarity'용 모델을 ONNX 포맷으로 다운로드하거나 변환하여 'model' 폴더에 배치해 주시기 바랍니다.
+	※ 주의사항: 언어모델 다운로드 및 사용에 대한 책임은 사용자에게 있습니다. Duruhrene은 사용자가 등록한 언어모델의 라이선스 위반으로 인해 발생한 문제에 대해 책임지지 않습니다.
 
-2. model_info (확장자 없음)
-   - 아래 내용으로 'model_info' 파일을 생성하세요. (JSON 포맷)
-   {
-       "model_name": "모델명",
-       "license": "라이선스",
-       "hidden_size": 768,
-       "max_length": 512,
-       "output_name": "last_hidden_state",
-       "use_pooling": true
-   }
+	필수 파일:
+	'model.onnx' (파일명 유지 필수)
+	'tokenizer.json' (토크나이저 파일)
+	※ 참고: 위 두 파일 외에 모델 구동에 필요한 추가 설정 파일('config.json' 등)이 있다면 함께 넣어주셔도 됩니다.
+
+2. model_info 파일 (필수)
+	위의 모델 파일들과 함께, 모델의 기술 사양을 명시한 'model_info' 파일이 반드시 필요합니다.
+	파일명: 'model_info' (확장자 없음)
+	형식: JSON 텍스트
+	[파일 작성 예시]
+	{
+		"model_name": "모델명",
+		"license": "라이선스",
+		"hidden_size": 768,
+		"max_length": 512,
+		"output_name": "last_hidden_state",
+		"use_pooling": true
+	}
+	[속성 상세 설명]
+	앱의 정상 작동을 위해 반드시 사용하려는 모델의 정확한 수치를 확인하여 기재해야 합니다.
+	| 키 (Key) | 설명 | 예시 |
+	| :--- | :--- | :--- |
+	| 'model_name' | 언어모델의 풀네임 (입력한 정보가 앱 내 라이선스란에 고지됨) | 'klue/roberta-base' |
+	| 'license' | 언어모델의 라이선스 정보 (입력한 정보가 앱 내 라이선스란에 고지됨) | 'MIT', 'CC-BY-SA' |
+	| 'hidden_size' | 임베딩 차원 크기 | '512', '768', '1024' |
+	| 'max_length' | 모델이 처리 가능한 최대 토큰 길이 | '512', '1024' |
+	| 'output_name' | 앱이 출력값으로 받을 ONNX 모델의 텐서 이름 | 'last_hidden_state', 'pooler_output' |
+	| 'use_pooling' | 앱 자체 풀링(Pooling) 수행 여부 | 'true', 'false' |
+	- true: 앱이 3차원 값을 받아 평균(Mean) 계산
+	- false: 모델이 이미 풀링한 2차원 값을 그대로 사용
+
+3. 폴더 구조 예시
+	최종적으로 'model' 폴더는 아래와 같은 구조여야 합니다.
+	model/
+	├── model.onnx        (필수)
+	├── tokenizer.json    (필수)
+	├── model_info        (필수: 위 JSON 내용이 담긴 파일)
+	└── config.json       (선택)
