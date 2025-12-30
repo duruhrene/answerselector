@@ -1,19 +1,31 @@
-# 파이썬 캐시 파일 무시(전역)
+# 1. 환경변수 및 비밀키
+.env
+.env.*
+*.key
+secrets.json
+
+# 2. 파이썬 캐시 및 로그
 __pycache__/
 *.py[cod]
+*.log
 
-# database 폴더 내 db파일들 무시
-database/*.db
-database/*.json
+# 3. 가상환경 및 IDE 설정
+venv/
+env/
+.venv/
+.vscode/
+.idea/
+.DS_Store
 
-# model 폴더 내 모델 관련 파일들 무시
-model/*.json
-model/*.onnx
-model/*.txt
-model/model_info
-!model/about_model_file.txt
+# 4. 데이터베이스(폴더 유지를 위한 .gitkeep만 허용)
+database/*
+!database/.gitkeep
 
-# 빌드 스크립트 및 아티팩트 무시
+# 5. 언어모델(about_model_file.txt만 허용)
+database/*
+!database/.gitkeep
+
+# 6. 빌드 스크립트 및 아티팩트
 build/
 dist/
 *.spec
